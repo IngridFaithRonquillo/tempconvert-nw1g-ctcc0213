@@ -5,53 +5,76 @@ public class ThermoConvert {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
+        System.out.println("Welcome to Temperature Converter!");
+        System.out.println("This application allows you to convert temperatures between Celsius, Fahrenheit, and Kelvin.");
+
         while (true) {
-            System.out.println("Temperature Converter");
-            System.out.println("1. Celsius to Fahrenheit");
-            System.out.println("2. Fahrenheit to Celsius");
-            System.out.println("3. Celsius to Kelvin");
-            System.out.println("4. Kelvin to Celsius");
-            System.out.println("5. Fahrenheit to Kelvin");
-            System.out.println("6. Kelvin to Fahrenheit");
-            System.out.println("7. Exit");
-            System.out.print("Enter your choice: ");
+            System.out.print("Do you want to proceed? (Enter 'y' to proceed, 'n' to exit): ");
+            char proceedChoice = scanner.next().charAt(0);
 
-            int choice = scanner.nextInt();
-
-            if (choice == 7) {
+            if (proceedChoice != 'y') {
                 System.out.println("Exiting Temperature Converter. Goodbye!");
-                break;
+                return;
             }
 
-            double temperature;
-            System.out.print("Enter temperature value: ");
-            temperature = scanner.nextDouble();
+            while (true) {
+                System.out.println("Choose the conversion type:");
+                System.out.println("1. Celsius to Fahrenheit");
+                System.out.println("2. Fahrenheit to Celsius");
+                System.out.println("3. Celsius to Kelvin");
+                System.out.println("4. Kelvin to Celsius");
+                System.out.println("5. Fahrenheit to Kelvin");
+                System.out.println("6. Kelvin to Fahrenheit");
+                System.out.println("7. Exit");
+                System.out.print("Enter your choice: ");
 
-            switch (choice) {
-                case 1:
-                    System.out.println("Temperature in Fahrenheit: " + celsiusToFahrenheit(temperature));
-                    break;
-                case 2:
-                    System.out.println("Temperature in Celsius: " + fahrenheitToCelsius(temperature));
-                    break;
-                case 3:
-                    System.out.println("Temperature in Kelvin: " + celsiusToKelvin(temperature));
-                    break;
-                case 4:
-                    System.out.println("Temperature in Celsius: " + kelvinToCelsius(temperature));
-                    break;
-                case 5:
-                    System.out.println("Temperature in Kelvin: " + fahrenheitToKelvin(temperature));
-                    break;
-                case 6:
-                    System.out.println("Temperature in Fahrenheit: " + kelvinToFahrenheit(temperature));
-                    break;
-                default:
+                int choice = scanner.nextInt();
+
+                if (choice == 7) {
+                    System.out.println("Exiting Temperature Converter. Goodbye!");
+                    return;
+                }
+
+                if (choice < 1 || choice > 6) {
                     System.out.println("Invalid choice. Please enter a valid option.");
+                    continue;
+                }
+
+                double temperature;
+                System.out.print("Enter temperature value: ");
+                temperature = scanner.nextDouble();
+
+                switch (choice) {
+                    case 1:
+                        System.out.println("Temperature in Fahrenheit: " + celsiusToFahrenheit(temperature));
+                        break;
+                    case 2:
+                        System.out.println("Temperature in Celsius: " + fahrenheitToCelsius(temperature));
+                        break;
+                    case 3:
+                        System.out.println("Temperature in Kelvin: " + celsiusToKelvin(temperature));
+                        break;
+                    case 4:
+                        System.out.println("Temperature in Celsius: " + kelvinToCelsius(temperature));
+                        break;
+                    case 5:
+                        System.out.println("Temperature in Kelvin: " + fahrenheitToKelvin(temperature));
+                        break;
+                    case 6:
+                        System.out.println("Temperature in Fahrenheit: " + kelvinToFahrenheit(temperature));
+                        break;
+                    default:
+                        System.out.println("Invalid choice. Please enter a valid option.");
+                }
+
+                System.out.print("Do you want to convert more temperatures? (y/n): ");
+                char continueChoice = scanner.next().charAt(0);
+                if (continueChoice != 'y') {
+                    System.out.println("Exiting Temperature Converter. Goodbye!");
+                    return;
+                }
             }
         }
-
-        scanner.close();
     }
 
     private static double celsiusToFahrenheit(double celsius) {
